@@ -1,0 +1,58 @@
+{
+  "created_utc": "2026-10-26T14:37:30.995334+00:00",
+  "backend": "none",
+  "model": null,
+  "embed_model": null,
+  "methods": [
+    "bm25",
+    "tfidf"
+  ],
+  "top_k": 1,
+  "rerank_pool": 6,
+  "seed": 42,
+  "temperature": 0,
+  "num_ctx": 16384,
+  "num_predict": 1800,
+  "bm25": {
+    "k1": 1.5,
+    "b": 0.75
+  },
+  "rrf_constant": 60,
+  "fusion_depth": 20,
+  "python": "3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]",
+  "platform": "Windows-10-10.0.19045-SP0",
+  "ollama": null,
+  "corpus": {
+    "source_url": "https://www.legislation.gov.uk/eur/2016/679/adopted/data.xml",
+    "source_sha256": "003f40ad8c691f71fa160683d104d6c5d716544571d4088fdd0b999ca88aae1e",
+    "corpus_sha256": "e56fa70ac9f7c718aec92e3b2056a8e82e0bef5a74c7ba35b578fbdfb9ae7a0e",
+    "article_count": 99,
+    "chunk_count": 389,
+    "language": "en",
+    "scope": "Frozen original EU GDPR, NOT amended UK GDPR. Not a current-law compliance certificate.",
+    "chunking": "numbered paragraph, nested lettered items retained, whole article when unnumbered",
+    "prepared_utc": "2026-10-26T14:20:51.594453+00:00"
+  },
+  "code_sha256": "e454bc1e6b0b01020197e156a1a31b8cf7af76f1d3d4fa1814f3f9764cda3b55",
+  "queries_sha256": "84a226d6bd7f48ad3e979fa941f615508bfe99d48a467ceb17c1494be79394d2",
+  "gold_sha256": "0ed849c9d4501acc0b5e94db7efa84ea03c76fc19f0f862ce3ab15597ffb0cf8",
+  "prompts_sha256": "a738afdc9a687afae96eea328f2f89406b20f5372867823df72872e205882ff0",
+  "gold_status": "contains AI-authored draft labels; human validation required",
+  "requested_split": "test",
+  "query_ids": [
+    "T01",
+    "T02",
+    "T03",
+    "T04",
+    "T05",
+    "T06",
+    "T07",
+    "T08",
+    "T09",
+    "T10",
+    "T11",
+    "T12"
+  ],
+  "human_evaluation": "not performed by this script",
+  "latency_note": "Index and document-embedding construction excluded; warm-query retrieval and generation measured separately."
+}

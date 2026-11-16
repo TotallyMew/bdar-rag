@@ -1,0 +1,11 @@
+{
+  "source_url": "https://www.legislation.gov.uk/eur/2016/679/adopted/data.xml",
+  "source_sha256": "003f40ad8c691f71fa160683d104d6c5d716544571d4088fdd0b999ca88aae1e",
+  "corpus_sha256": "e56fa70ac9f7c718aec92e3b2056a8e82e0bef5a74c7ba35b578fbdfb9ae7a0e",
+  "article_count": 99,
+  "chunk_count": 389,
+  "language": "en",
+  "scope": "Frozen original EU GDPR, NOT amended UK GDPR. Not a current-law compliance certificate.",
+  "chunking": "numbered paragraph, nested lettered items retained, whole article when unnumbered",
+  "prepared_utc": "2026-10-26T14:20:51.594453+00:00"
+}

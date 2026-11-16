@@ -1,0 +1,97 @@
+[
+  {
+    "image": "etezadi2026.png",
+    "source_pdf": "sources/etezadi2026.pdf",
+    "pdf_page_1_based": 24,
+    "crop_pixels": [
+      105,
+      105,
+      846,
+      292
+    ],
+    "highlight_pixels_on_source_render": [
+      199,
+      266,
+      832,
+      289
+    ],
+    "description": "Table 9, RICE_LRT average row",
+    "modifications": "PDF page rendered at 1.6 scale, cropped, evidence highlighted; original text unchanged"
+  },
+  {
+    "image": "legalbenchrag2024.png",
+    "source_pdf": "sources/legalbenchrag2024.pdf",
+    "pdf_page_1_based": 6,
+    "crop_pixels": [
+      80,
+      278,
+      875,
+      407
+    ],
+    "highlight_pixels_on_source_render": [
+      143,
+      344,
+      810,
+      365
+    ],
+    "description": "Table 3, LegalBench-RAG-mini number of queries",
+    "modifications": "PDF page rendered at 1.6 scale, cropped, evidence highlighted; original text unchanged"
+  },
+  {
+    "image": "alce2023.png",
+    "source_pdf": "sources/alce2023.pdf",
+    "pdf_page_1_based": 6,
+    "crop_pixels": [
+      485,
+      108,
+      848,
+      525
+    ],
+    "highlight_pixels_on_source_render": [
+      503,
+      184,
+      831,
+      214
+    ],
+    "description": "Table 4, VANILLA and answer RERANK rows; RERANK here selects answers, not retrieved chunks",
+    "modifications": "PDF page rendered at 1.6 scale, cropped, evidence highlighted; original text unchanged"
+  },
+  {
+    "image": "ragas2024.png",
+    "source_pdf": "sources/ragas2024.pdf",
+    "pdf_page_1_based": 6,
+    "crop_pixels": [
+      105,
+      421,
+      473,
+      613
+    ],
+    "highlight_pixels_on_source_render": [
+      116,
+      462,
+      461,
+      488
+    ],
+    "description": "Table 4, RAGAs agreement with human annotations",
+    "modifications": "PDF page rendered at 1.6 scale, cropped, evidence highlighted; original text unchanged"
+  },
+  {
+    "image": "lostmiddle2024.png",
+    "source_pdf": "sources/lostmiddle2024.pdf",
+    "pdf_page_1_based": 2,
+    "crop_pixels": [
+      109,
+      86,
+      469,
+      425
+    ],
+    "highlight_pixels_on_source_render": [
+      254,
+      286,
+      345,
+      322
+    ],
+    "description": "Figure 1, low accuracy when relevant document is near the middle",
+    "modifications": "PDF page rendered at 1.6 scale, cropped, evidence highlighted; original text unchanged"
+  }
+]

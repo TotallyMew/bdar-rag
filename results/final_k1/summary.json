@@ -1,0 +1,28 @@
+[
+  {
+    "split": "test",
+    "method": "bm25",
+    "n": 12,
+    "n_retrieval_evaluated": 12,
+    "errors": 0,
+    "recall_at_k": 0.4444444444444444,
+    "precision_at_k": 0.5833333333333334,
+    "mrr_at_k": 0.5833333333333334,
+    "all_required_found": 0.3333333333333333,
+    "retrieval_ms": 1.3561166609482218,
+    "generation_ms": null
+  },
+  {
+    "split": "test",
+    "method": "tfidf",
+    "n": 12,
+    "n_retrieval_evaluated": 12,
+    "errors": 0,
+    "recall_at_k": 0.3194444444444444,
+    "precision_at_k": 0.4166666666666667,
+    "mrr_at_k": 0.4166666666666667,
+    "all_required_found": 0.25,
+    "retrieval_ms": 2.2347166765636453,
+    "generation_ms": null
+  }
+]

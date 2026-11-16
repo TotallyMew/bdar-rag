@@ -1,0 +1,19 @@
+# Local chat data, indexes, exports and working files
+/ui_data/
+BDAR_pokalbis_*.json
+/.build/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+*.log
+Thumbs.db
+~$*
+
+# Distribution manifest and keys for blind evaluation
+/PACKAGE_MANIFEST.json
+review_key_private.json

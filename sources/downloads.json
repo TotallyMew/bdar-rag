@@ -1,0 +1,59 @@
+[
+  {
+    "file": "etezadi2026.pdf",
+    "url": "https://arxiv.org/pdf/2502.04916v8",
+    "bytes": 1251418,
+    "sha256": "3a0690448b07e34dd1024b1559cbde0245eab58d5fd0c55fec195a46397778cf"
+  },
+  {
+    "file": "legalbenchrag2024.pdf",
+    "url": "https://arxiv.org/pdf/2408.10343v1",
+    "bytes": 605888,
+    "sha256": "49f456c744cac4048018588550bf5ccb68ad29b49442d7bd227f21c9398824cd"
+  },
+  {
+    "file": "alce2023.pdf",
+    "url": "https://aclanthology.org/2023.emnlp-main.398.pdf",
+    "bytes": 481920,
+    "sha256": "ae9868f07f0f7ffaae5346778f79b7827d9ec6b13b1e6aae4dff6b2ffc37a2e1"
+  },
+  {
+    "file": "ragas2024.pdf",
+    "url": "https://aclanthology.org/2024.eacl-demo.16.pdf",
+    "bytes": 377888,
+    "sha256": "e2038b8cff7574bf5302e1ceb6bfbac6d2471c352073b27f21460910936febce"
+  },
+  {
+    "file": "lostmiddle2024.pdf",
+    "url": "https://aclanthology.org/2024.tacl-1.9.pdf",
+    "bytes": 2609413,
+    "sha256": "f37f6fabe0fe0d8c73b67579cd115dbf14e282cfb7b7af655ae8109638402c9b"
+  },
+  {
+    "file": "magesh2025.pdf",
+    "url": "https://dho.stanford.edu/wp-content/uploads/Legal_RAG_Hallucinations.pdf",
+    "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1028)>"
+  },
+  {
+    "file": "consent2020.pdf",
+    "url": "https://www.edpb.europa.eu/sites/default/files/files/file1/edpb_guidelines_202005_consent_en.pdf",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "file": "gdpr.html",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32016R0679",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "file": "gdpr.pdf",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32016R0679",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "file": "ai_rules.pdf",
+    "url": "https://moodle.vilniustech.lt/pluginfile.php/120956/mod_page/content/15/Dirbtinio%20intelekto%20atsakingo%20naudojimo%20taisykl%C4%97s.pdf",
+    "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1028)>"
+  }
+]

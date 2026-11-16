@@ -1,0 +1,174 @@
+<!doctype html><html lang="lt"><meta charset="utf-8"><title>BDAR RAG eksperimentas</title>
+<style>body{font:17px/1.55 system-ui;max-width:1120px;margin:40px auto;padding:0 24px;color:#18283a}h1,h2{line-height:1.2}table{border-collapse:collapse;width:100%}td,th{padding:10px;text-align:left;border-bottom:1px solid #ccd4da}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f2f5f7;padding:18px}summary{cursor:pointer}article{margin:32px 0}small{color:#526272}</style>
+<h1>BDAR reikalavimų atsekamumas su RAG</h1>
+<p>Etaloninės nuorodos: AI parengtas juodraštis, kol žmogus jų nepatvirtino. Paieškos rodikliai neįrodo atsakymų teisinio teisingumo. Šaltinis: fiksuota pradinė ES BDAR redakcija.</p>
+<p>Režimas: <b>none</b>. Modelis: None. Vienodas top-k: 1. Tankios paieškos modelis: None.</p>
+<h2>Paieškos rezultatai</h2><table><tr><th>Imtis</th><th>Metodas</th><th>N</th><th>Recall@k</th><th>MRR@k</th><th>Visi būtini punktai</th></tr>
+<tr><td>test</td><td>bm25</td><td>12</td><td>0.444</td><td>0.583</td><td>0.333</td></tr>
+<tr><td>test</td><td>tfidf</td><td>12</td><td>0.319</td><td>0.417</td><td>0.250</td></tr>
+</table><h2>Užklausos, šaltiniai ir atsakymai</h2>
+<article><h3>T08 · tfidf</h3><p>Ar vien šifravimas reiškia, kad duomenų tvarkymas visiškai saugus ir atitinka BDAR?</p><small>Eksperimento užklausa: Does encryption alone mean personal data processing is fully secure and compliant with GDPR?</small>
+<details><summary>Rasti teisiniai punktai</summary>
+<h4><a href="https://www.legislation.gov.uk/eur/2016/679/article/6/4/adopted">GDPR:6.4 · Lawfulness of processing</a></h4><pre>Where the processing for a purpose other than that for which the personal data have been collected is not based on the data subject&#x27;s consent or on a Union or Member State law which constitutes a necessary and proportionate measure in a democratic society to safeguard the objectives referred to in Article 23(1), the controller shall, in order to ascertain whether processing for another purpose is compatible with the purpose for which the personal data are initially collected, take into account, inter alia:
+any link between the purposes for which the personal data have been collected and the purposes of the intended further processing;
+the context in which the personal data have been collected, in particular regarding the relationship between data subjects and the controller;
+the nature of the personal data, in particular whether special categories of personal data are processed, pursuant to Article 9, or whether personal data related to criminal convictions and offences are processed, pursuant to Article 10;
+the possible consequences of the intended further processing for data subjects;
+the existence of appropriate safeguards, which may include encryption or pseudonymisation.</pre>
+</details>
+<p><i>Atlikta tik paieška. LLM atsakymas šiame paleidime negeneruotas.</i></p>
+</article>
+<article><h3>T03 · tfidf</h3><p>Ar atšaukus sutikimą ankstesnis duomenų tvarkymas tampa neteisėtas?</p><small>Eksperimento užklausa: What happens to the lawfulness of earlier processing after a person withdraws consent?</small>
+<details><summary>Rasti teisiniai punktai</summary>
+<h4><a href="https://www.legislation.gov.uk/eur/2016/679/article/7/3/adopted">GDPR:7.3 · Conditions for consent</a></h4><pre>The data subject shall have the right to withdraw his or her consent at any time. The withdrawal of consent shall not affect the lawfulness of processing based on consent before its withdrawal. Prior to giving consent, the data subject shall be informed thereof. It shall be as easy to withdraw as to give consent.</pre>
+</details>
+<p><i>Atlikta tik paieška. LLM atsakymas šiame paleidime negeneruotas.</i></p>
+</article>
+<article><h3>T10 · bm25</h3><p>Kokia BDAR taisyklė taikoma vien automatizuotam sprendimui, sukeliančiam reikšmingų teisinių padarinių?</p><small>Eksperimento užklausa: What is the GDPR rule for a decision based solely on automated processing which has a significant legal effect on a person?</small>
+<details><summary>Rasti teisiniai punktai</summary>
+<h4><a href="https://www.legislation.gov.uk/eur/2016/679/article/22/1/adopted">GDPR:22.1 · Automated individual decision-making, including profiling</a></h4><pre>The data subject shall have the right not to be subject to a decision based solely on automated processing, including profiling, which produces legal effects concerning him or her or similarly significantly affects him or her.</pre>
+</details>
+<p><i>Atlikta tik paieška. LLM atsakymas šiame paleidime negeneruotas.</i></p>
+</article>
+<article><h3>T12 · tfidf</h3><p>Kokia pagrindinė teritorinio taikymo taisyklė ES įsisteigusiam duomenų valdytojui?</p><small>Eksperimento užklausa: What is the basic territorial rule for an EU-established controller processing personal data?</small>
+<details><summary>Rasti teisiniai punktai</summary>
+<h4><a href="https://www.legislation.gov.uk/eur/2016/679/article/3/3/adopted">GDPR:3.3 · Territorial scope</a></h4><pre>This Regulation applies to the processing of personal data by a controller not established in the Union, but in a place where Member State law applies by virtue of public international law.</pre>
+</details>
+<p><i>Atlikta tik paieška. LLM atsakymas šiame paleidime negeneruotas.</i></p>
+</article>
+<article><h3>T07 · tfidf</h3><p>Ar asmeniui paprieštaravus galima toliau tvarkyti jo duomenis tiesioginei rinkodarai?</p><small>Eksperimento užklausa: If a person objects to direct marketing, may the controller keep processing data for that marketing?</small>
+<details><summary>Rasti teisiniai punktai</summary>
+<h4><a href="https://www.legislation.gov.uk/eur/2016/679/article/21/3/adopted">GDPR:21.3 · Right to object</a></h4><pre>Where the data subject objects to processing for direct marketing purposes, the personal data shall no longer be processed for such purposes.</pre>
+</details>
+<p><i>Atlikta tik paieška. LLM atsakymas šiame paleidime negeneruotas.</i></p>
+</article>
+<article><h3>T06 · bm25</h3><p>Kada asmuo gali gauti duomenis kompiuterio skaitomu formatu ir perduoti juos kitam valdytojui?</p><small>Eksperimento užklausa: When can a person receive data in a machine-readable format and transmit it to another controller?</small>
+<details><summary>Rasti teisiniai punktai</summary>
+<h4><a href="https://www.legislation.gov.uk/eur/2016/679/article/20/1/adopted">GDPR:20.1 · Right to data portability</a></h4><pre>The data subject shall have the right to receive the personal data concerning him or her, which he or she has provided to a controller, in a structured, commonly used and machine-readable format and have the right to transmit those data to another controller without hindrance from the controller to which the personal data have been provided, where:
+the processing is based on consent pursuant to point (a) of Article 6(1) or point (a) of Article 9(2) or on a contract pursuant to point (b) of Article 6(1); and
+the processing is carried out by automated means.</pre>
+</details>
+<p><i>Atlikta tik paieška. LLM atsakymas šiame paleidime negeneruotas.</i></p>
+</article>
+<article><h3>T09 · tfidf</h3><p>Kada valdytojas turi atlikti poveikio duomenų apsaugai vertinimą prieš pradėdamas tvarkymą?</p><small>Eksperimento užklausa: When must a controller carry out a data protection impact assessment before processing?</small>
+<details><summary>Rasti teisiniai punktai</summary>
+<h4><a href="https://www.legislation.gov.uk/eur/2016/679/article/35/11/adopted">GDPR:35.11 · Data protection impact assessment</a></h4><pre>Where necessary, the controller shall carry out a review to assess if processing is performed in accordance with the data protection impact assessment at least when there is a change of the risk represented by processing operations.</pre>
+</details>
+<p><i>Atlikta tik paieška. LLM atsakymas šiame paleidime negeneruotas.</i></p>
+</article>
+<article><h3>T06 · tfidf</h3><p>Kada asmuo gali gauti duomenis kompiuterio skaitomu formatu ir perduoti juos kitam valdytojui?</p><small>Eksperimento užklausa: When can a person receive data in a machine-readable format and transmit it to another controller?</small>
+<details><summary>Rasti teisiniai punktai</summary>
+<h4><a href="https://www.legislation.gov.uk/eur/2016/679/article/20/1/adopted">GDPR:20.1 · Right to data portability</a></h4><pre>The data subject shall have the right to receive the personal data concerning him or her, which he or she has provided to a controller, in a structured, commonly used and machine-readable format and have the right to transmit those data to another controller without hindrance from the controller to which the personal data have been provided, where:
+the processing is based on consent pursuant to point (a) of Article 6(1) or point (a) of Article 9(2) or on a contract pursuant to point (b) of Article 6(1); and
+the processing is carried out by automated means.</pre>
+</details>
+<p><i>Atlikta tik paieška. LLM atsakymas šiame paleidime negeneruotas.</i></p>
+</article>
+<article><h3>T08 · bm25</h3><p>Ar vien šifravimas reiškia, kad duomenų tvarkymas visiškai saugus ir atitinka BDAR?</p><small>Eksperimento užklausa: Does encryption alone mean personal data processing is fully secure and compliant with GDPR?</small>
+<details><summary>Rasti teisiniai punktai</summary>
+<h4><a href="https://www.legislation.gov.uk/eur/2016/679/article/6/4/adopted">GDPR:6.4 · Lawfulness of processing</a></h4><pre>Where the processing for a purpose other than that for which the personal data have been collected is not based on the data subject&#x27;s consent or on a Union or Member State law which constitutes a necessary and proportionate measure in a democratic society to safeguard the objectives referred to in Article 23(1), the controller shall, in order to ascertain whether processing for another purpose is compatible with the purpose for which the personal data are initially collected, take into account, inter alia:
+any link between the purposes for which the personal data have been collected and the purposes of the intended further processing;
+the context in which the personal data have been collected, in particular regarding the relationship between data subjects and the controller;
+the nature of the personal data, in particular whether special categories of personal data are processed, pursuant to Article 9, or whether personal data related to criminal convictions and offences are processed, pursuant to Article 10;
+the possible consequences of the intended further processing for data subjects;
+the existence of appropriate safeguards, which may include encryption or pseudonymisation.</pre>
+</details>
+<p><i>Atlikta tik paieška. LLM atsakymas šiame paleidime negeneruotas.</i></p>
+</article>
+<article><h3>T09 · bm25</h3><p>Kada valdytojas turi atlikti poveikio duomenų apsaugai vertinimą prieš pradėdamas tvarkymą?</p><small>Eksperimento užklausa: When must a controller carry out a data protection impact assessment before processing?</small>
+<details><summary>Rasti teisiniai punktai</summary>
+<h4><a href="https://www.legislation.gov.uk/eur/2016/679/article/35/11/adopted">GDPR:35.11 · Data protection impact assessment</a></h4><pre>Where necessary, the controller shall carry out a review to assess if processing is performed in accordance with the data protection impact assessment at least when there is a change of the risk represented by processing operations.</pre>
+</details>
+<p><i>Atlikta tik paieška. LLM atsakymas šiame paleidime negeneruotas.</i></p>
+</article>
+<article><h3>T01 · tfidf</h3><p>Ar kiekvienam duomenų tvarkymui būtinas sutikimas, ar galima remtis sutartimi?</p><small>Eksperimento užklausa: Must all processing of personal data rely on consent, or can a contract provide a lawful basis?</small>
+<details><summary>Rasti teisiniai punktai</summary>
+<h4><a href="https://www.legislation.gov.uk/eur/2016/679/article/7/4/adopted">GDPR:7.4 · Conditions for consent</a></h4><pre>When assessing whether consent is freely given, utmost account shall be taken of whether, inter alia, the performance of a contract, including the provision of a service, is conditional on consent to the processing of personal data that is not necessary for the performance of that contract.</pre>
+</details>
+<p><i>Atlikta tik paieška. LLM atsakymas šiame paleidime negeneruotas.</i></p>
+</article>
+<article><h3>T07 · bm25</h3><p>Ar asmeniui paprieštaravus galima toliau tvarkyti jo duomenis tiesioginei rinkodarai?</p><small>Eksperimento užklausa: If a person objects to direct marketing, may the controller keep processing data for that marketing?</small>
+<details><summary>Rasti teisiniai punktai</summary>
+<h4><a href="https://www.legislation.gov.uk/eur/2016/679/article/21/3/adopted">GDPR:21.3 · Right to object</a></h4><pre>Where the data subject objects to processing for direct marketing purposes, the personal data shall no longer be processed for such purposes.</pre>
+</details>
+<p><i>Atlikta tik paieška. LLM atsakymas šiame paleidime negeneruotas.</i></p>
+</article>
+<article><h3>T11 · tfidf</h3><p>Jei valdytojas turi 100 darbuotojų, ar jis visada atleidžiamas nuo veiklos įrašų, net kai tvarkymas rizikingas ir vyksta reguliariai?</p><small>Eksperimento užklausa: If a controller has only 100 employees, is it always exempt from keeping processing records even for risky non-occasional processing?</small>
+<details><summary>Rasti teisiniai punktai</summary>
+<h4><a href="https://www.legislation.gov.uk/eur/2016/679/article/30/3/adopted">GDPR:30.3 · Records of processing activities</a></h4><pre>The records referred to in paragraphs 1 and 2 shall be in writing, including in electronic form.</pre>
+</details>
+<p><i>Atlikta tik paieška. LLM atsakymas šiame paleidime negeneruotas.</i></p>
+</article>
+<article><h3>T04 · bm25</h3><p>Ar sudėtingo prašymo terminą galima pratęsti ir kada apie tai pranešti asmeniui?</p><small>Eksperimento užklausa: Can an organisation extend the one month response period for a complex access request, and when must it tell the person?</small>
+<details><summary>Rasti teisiniai punktai</summary>
+<h4><a href="https://www.legislation.gov.uk/eur/2016/679/article/12/3/adopted">GDPR:12.3 · Transparent information, communication and modalities for the exercise of the rights of the data subject</a></h4><pre>The controller shall provide information on action taken on a request under Articles 15 to 22 to the data subject without undue delay and in any event within one month of receipt of the request. That period may be extended by two further months where necessary, taking into account the complexity and number of the requests. The controller shall inform the data subject of any such extension within one month of receipt of the request, together with the reasons for the delay. Where the data subject makes the request by electronic form means, the information shall be provided by electronic means where possible, unless otherwise requested by the data subject.</pre>
+</details>
+<p><i>Atlikta tik paieška. LLM atsakymas šiame paleidime negeneruotas.</i></p>
+</article>
+<article><h3>T05 · tfidf</h3><p>Ar visada galiu reikalauti ištrinti įrašus, net jeigu juos būtina saugoti vykdant teisinę prievolę?</p><small>Eksperimento užklausa: Can I always demand erasure even where records must be kept to comply with a legal obligation?</small>
+<details><summary>Rasti teisiniai punktai</summary>
+<h4><a href="https://www.legislation.gov.uk/eur/2016/679/article/30/3/adopted">GDPR:30.3 · Records of processing activities</a></h4><pre>The records referred to in paragraphs 1 and 2 shall be in writing, including in electronic form.</pre>
+</details>
+<p><i>Atlikta tik paieška. LLM atsakymas šiame paleidime negeneruotas.</i></p>
+</article>
+<article><h3>T02 · bm25</h3><p>Ar tyla arba iš anksto pažymėtas langelis laikomas laisvu ir nedviprasmišku sutikimu?</p><small>Eksperimento užklausa: Can silence or a pre-ticked checkbox count as a freely given and unambiguous agreement to processing?</small>
+<details><summary>Rasti teisiniai punktai</summary>
+<h4><a href="https://www.legislation.gov.uk/eur/2016/679/article/7/4/adopted">GDPR:7.4 · Conditions for consent</a></h4><pre>When assessing whether consent is freely given, utmost account shall be taken of whether, inter alia, the performance of a contract, including the provision of a service, is conditional on consent to the processing of personal data that is not necessary for the performance of that contract.</pre>
+</details>
+<p><i>Atlikta tik paieška. LLM atsakymas šiame paleidime negeneruotas.</i></p>
+</article>
+<article><h3>T12 · bm25</h3><p>Kokia pagrindinė teritorinio taikymo taisyklė ES įsisteigusiam duomenų valdytojui?</p><small>Eksperimento užklausa: What is the basic territorial rule for an EU-established controller processing personal data?</small>
+<details><summary>Rasti teisiniai punktai</summary>
+<h4><a href="https://www.legislation.gov.uk/eur/2016/679/article/3/3/adopted">GDPR:3.3 · Territorial scope</a></h4><pre>This Regulation applies to the processing of personal data by a controller not established in the Union, but in a place where Member State law applies by virtue of public international law.</pre>
+</details>
+<p><i>Atlikta tik paieška. LLM atsakymas šiame paleidime negeneruotas.</i></p>
+</article>
+<article><h3>T03 · bm25</h3><p>Ar atšaukus sutikimą ankstesnis duomenų tvarkymas tampa neteisėtas?</p><small>Eksperimento užklausa: What happens to the lawfulness of earlier processing after a person withdraws consent?</small>
+<details><summary>Rasti teisiniai punktai</summary>
+<h4><a href="https://www.legislation.gov.uk/eur/2016/679/article/7/3/adopted">GDPR:7.3 · Conditions for consent</a></h4><pre>The data subject shall have the right to withdraw his or her consent at any time. The withdrawal of consent shall not affect the lawfulness of processing based on consent before its withdrawal. Prior to giving consent, the data subject shall be informed thereof. It shall be as easy to withdraw as to give consent.</pre>
+</details>
+<p><i>Atlikta tik paieška. LLM atsakymas šiame paleidime negeneruotas.</i></p>
+</article>
+<article><h3>T10 · tfidf</h3><p>Kokia BDAR taisyklė taikoma vien automatizuotam sprendimui, sukeliančiam reikšmingų teisinių padarinių?</p><small>Eksperimento užklausa: What is the GDPR rule for a decision based solely on automated processing which has a significant legal effect on a person?</small>
+<details><summary>Rasti teisiniai punktai</summary>
+<h4><a href="https://www.legislation.gov.uk/eur/2016/679/article/22/1/adopted">GDPR:22.1 · Automated individual decision-making, including profiling</a></h4><pre>The data subject shall have the right not to be subject to a decision based solely on automated processing, including profiling, which produces legal effects concerning him or her or similarly significantly affects him or her.</pre>
+</details>
+<p><i>Atlikta tik paieška. LLM atsakymas šiame paleidime negeneruotas.</i></p>
+</article>
+<article><h3>T04 · tfidf</h3><p>Ar sudėtingo prašymo terminą galima pratęsti ir kada apie tai pranešti asmeniui?</p><small>Eksperimento užklausa: Can an organisation extend the one month response period for a complex access request, and when must it tell the person?</small>
+<details><summary>Rasti teisiniai punktai</summary>
+<h4><a href="https://www.legislation.gov.uk/eur/2016/679/article/12/3/adopted">GDPR:12.3 · Transparent information, communication and modalities for the exercise of the rights of the data subject</a></h4><pre>The controller shall provide information on action taken on a request under Articles 15 to 22 to the data subject without undue delay and in any event within one month of receipt of the request. That period may be extended by two further months where necessary, taking into account the complexity and number of the requests. The controller shall inform the data subject of any such extension within one month of receipt of the request, together with the reasons for the delay. Where the data subject makes the request by electronic form means, the information shall be provided by electronic means where possible, unless otherwise requested by the data subject.</pre>
+</details>
+<p><i>Atlikta tik paieška. LLM atsakymas šiame paleidime negeneruotas.</i></p>
+</article>
+<article><h3>T05 · bm25</h3><p>Ar visada galiu reikalauti ištrinti įrašus, net jeigu juos būtina saugoti vykdant teisinę prievolę?</p><small>Eksperimento užklausa: Can I always demand erasure even where records must be kept to comply with a legal obligation?</small>
+<details><summary>Rasti teisiniai punktai</summary>
+<h4><a href="https://www.legislation.gov.uk/eur/2016/679/article/17/1/adopted">GDPR:17.1 · Right to erasure (‘right to be forgotten’)</a></h4><pre>The data subject shall have the right to obtain from the controller the erasure of personal data concerning him or her without undue delay and the controller shall have the obligation to erase personal data without undue delay where one of the following grounds applies:
+the personal data are no longer necessary in relation to the purposes for which they were collected or otherwise processed;
+the data subject withdraws consent on which the processing is based according to point (a) of Article 6(1), or point (a) of Article 9(2), and where there is no other legal ground for the processing;
+the data subject objects to the processing pursuant to Article 21(1) and there are no overriding legitimate grounds for the processing, or the data subject objects to the processing pursuant to Article 21(2);
+the personal data have been unlawfully processed;
+the personal data have to be erased for compliance with a legal obligation in Union or Member State law to which the controller is subject;
+the personal data have been collected in relation to the offer of information society services referred to in Article 8(1).</pre>
+</details>
+<p><i>Atlikta tik paieška. LLM atsakymas šiame paleidime negeneruotas.</i></p>
+</article>
+<article><h3>T01 · bm25</h3><p>Ar kiekvienam duomenų tvarkymui būtinas sutikimas, ar galima remtis sutartimi?</p><small>Eksperimento užklausa: Must all processing of personal data rely on consent, or can a contract provide a lawful basis?</small>
+<details><summary>Rasti teisiniai punktai</summary>
+<h4><a href="https://www.legislation.gov.uk/eur/2016/679/article/7/4/adopted">GDPR:7.4 · Conditions for consent</a></h4><pre>When assessing whether consent is freely given, utmost account shall be taken of whether, inter alia, the performance of a contract, including the provision of a service, is conditional on consent to the processing of personal data that is not necessary for the performance of that contract.</pre>
+</details>
+<p><i>Atlikta tik paieška. LLM atsakymas šiame paleidime negeneruotas.</i></p>
+</article>
+<article><h3>T02 · tfidf</h3><p>Ar tyla arba iš anksto pažymėtas langelis laikomas laisvu ir nedviprasmišku sutikimu?</p><small>Eksperimento užklausa: Can silence or a pre-ticked checkbox count as a freely given and unambiguous agreement to processing?</small>
+<details><summary>Rasti teisiniai punktai</summary>
+<h4><a href="https://www.legislation.gov.uk/eur/2016/679/article/7/4/adopted">GDPR:7.4 · Conditions for consent</a></h4><pre>When assessing whether consent is freely given, utmost account shall be taken of whether, inter alia, the performance of a contract, including the provision of a service, is conditional on consent to the processing of personal data that is not necessary for the performance of that contract.</pre>
+</details>
+<p><i>Atlikta tik paieška. LLM atsakymas šiame paleidime negeneruotas.</i></p>
+</article>
+<article><h3>T11 · bm25</h3><p>Jei valdytojas turi 100 darbuotojų, ar jis visada atleidžiamas nuo veiklos įrašų, net kai tvarkymas rizikingas ir vyksta reguliariai?</p><small>Eksperimento užklausa: If a controller has only 100 employees, is it always exempt from keeping processing records even for risky non-occasional processing?</small>
+<details><summary>Rasti teisiniai punktai</summary>
+<h4><a href="https://www.legislation.gov.uk/eur/2016/679/article/30/5/adopted">GDPR:30.5 · Records of processing activities</a></h4><pre>The obligations referred to in paragraphs 1 and 2 shall not apply to an enterprise or an organisation employing fewer than 250 persons unless the processing it carries out is likely to result in a risk to the rights and freedoms of data subjects, the processing is not occasional, or the processing includes special categories of data as referred to in Article 9(1) or personal data relating to criminal convictions and offences referred to in Article 10.</pre>
+</details>
+<p><i>Atlikta tik paieška. LLM atsakymas šiame paleidime negeneruotas.</i></p>
+</article>
+</html>

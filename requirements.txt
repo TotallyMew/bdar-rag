@@ -1,0 +1,2 @@
+# Python 3.10+ standard library only. No pip packages required.
+# Optional external service: Ollama (for dense retrieval, reranking and generation).
