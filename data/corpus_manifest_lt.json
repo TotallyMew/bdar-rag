@@ -1,0 +1,12 @@
+{
+  "source_url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj/lit",
+  "download_url": "https://publications.europa.eu/resource/celex/32016R0679",
+  "accept_language": "lt, lit",
+  "source_sha256": "34dab912a30940daf11b8f74ff1e045344c485d50c0b1158e563848112a68492",
+  "corpus_sha256": "0a45d1e1eddaaae06165b55b2253d962459c8ec9d508743a92b19c9e9e18f7fa",
+  "article_count": 99,
+  "chunk_count": 389,
+  "language": "lt",
+  "scope": "EU GDPR as published in the 2016 Official Journal, Lithuanian.",
+  "chunking": "Same article and paragraph IDs as the English experiment; lettered items retained."
+}

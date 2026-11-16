@@ -156,6 +156,13 @@ def rrf(*rankings, constant=60):
             scores[doc_id] += 1/(constant+rank)
     return sorted(scores.items(), key=lambda x:(-x[1],x[0]))
 
+class OllamaHTTPError(RuntimeError):
+    def __init__(self, endpoint, status, detail):
+        self.status = status
+        self.detail = detail
+        super().__init__(f'Ollama {endpoint} (HTTP {status}): {detail}')
+
+
 class Ollama:
     def __init__(self, host, model, embed_model, seed, timeout):
         self.host, self.model, self.embed_model = host.rstrip('/'), model, embed_model
@@ -168,6 +175,17 @@ class Ollama:
         try:
             with urllib.request.urlopen(req, timeout=self.timeout) as r:
                 return json.loads(r.read())
+        except urllib.error.HTTPError as exc:
+            with exc:
+                raw = exc.read(4096).decode('utf-8', errors='replace')
+            try:
+                payload = json.loads(raw)
+            except ValueError:
+                payload = None
+            detail = payload.get('error') if isinstance(payload, dict) else None
+            if not isinstance(detail, str) or not detail.strip():
+                detail = exc.reason
+            raise OllamaHTTPError(endpoint, exc.code, str(detail)[:600]) from exc
         except (urllib.error.URLError, TimeoutError) as exc:
             raise RuntimeError(f'Ollama call failed: {endpoint}. Start Ollama and pull the documented models. {exc}') from exc
 

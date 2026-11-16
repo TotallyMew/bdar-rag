@@ -9,22 +9,24 @@ Jei jau veikia, paleidiklis atvers tą pačią programą. Prireikus paleidiklis 
 ## Klausimai ir savi promptai
 
 1. Įrašykite klausimą apatiniame lauke ir spauskite **Siųsti** arba **Enter**. Nauja eilutė: **Shift+Enter**.
-2. Kairėje pasirinkite BM25, semantinę paiešką, hibridą, hibridą su perrikiavimu, TF-IDF arba atsakymą be RAG.
-3. **Modelis ir promptai** leidžia pasirinkti atsakymų bei paieškos modelį, fragmentų skaičių ir konteksto talpą. Skyrelyje **Sisteminės instrukcijos** galite patys redaguoti modelio rolę, kalbą ir atsakymo taisykles, atskirai su RAG ir be RAG.
+2. Kairėje pasirinkite paieškos metodą, RAG eigą arba kontrolinį variantą **Be RAG**. Žemiau pasirinkite BDAR teksto kalbą **LT / EN** ir vietinius „Ollama“ modelius.
+3. **Visi parametrai** leidžia nustatyti fragmentų skaičių, konteksto talpą ir modelio mąstymo išvesties rodymą. Skyrelyje **Sisteminės instrukcijos** galite redaguoti modelio rolę, kalbą ir atsakymo taisykles.
 4. Paspauskite **Išsaugoti nustatymus**. Pakeitimai taikomi kitam klausimui. **Atkurti pradines** sugrąžina pradines sistemines instrukcijas redaktoriuje.
 
-Pradinis atsakymų modelis: `qwen3.5:4b`. Ankstesnis `qwen2.5:3b` paliktas palyginimui; bandymuose jo lietuvių kalba buvo prastesnė. Semantinei paieškai: `nomic-embed-text:latest`. Šiam kompiuteriui pasirinkta pradinė 8192 žetonų konteksto talpa. Modelių dydžiai ir konteksto ilgis lemia atminties naudojimą.
+Pradinis atsakymų modelis yra `qwen3.5:4b`. Naujai konfigūracijai semantinei paieškai parenkamas daugiakalbis `bge-m3:latest`, kai jis įdiegtas. Anksčiau išsaugotą modelį galima pakeisti kairėje. Pirminė konteksto talpa yra 8192 žetonų.
 
 ## Šaltinių tikrinimas
 
-- Dešinėje pateikiami tikri paieškos rasti BDAR fragmentai. Atverkite punktą, kad matytumėte visą jo tekstą.
-- Po atsakymu atverkite **Teiginiai ir citatos**. Paspaudę punkto numerį pereisite į atitinkamą šaltinį, kuriame, jei citata tiksli, pažymimas cituotas tekstas.
-- **Citatų patikra: X % (rasta / visos)** rodo tiksliai rastų citatų dalį pateiktuose šaltiniuose. Pavyzdžiui, 4 iš 5 = 80 %. Tai nėra modelio pasitikėjimas ar atsakymo teisingumo tikimybė. Net 100 % gali reikšti tikras, bet klaidingai interpretuotas citatas. Kai citatų nėra, procentas neskaičiuojamas.
+- Virš atsakymo atverkite **RAG paieškos rezultatą**. Rodomos realios užklausos, reitingas ir tai, kurie fragmentai perduoti modeliui. Jei įvestyje Straipsnis nurodytas tiesiogiai, jis gali patekti modeliui papildomai.
+- Kriterijus įrašykite atskirose eilutėse su `K1.`, `K2.` ir pan. Kiekvienas kriterijus gauna atskirą paiešką, papildytą viso reikalavimo kontekstu. Po bendru atsakymu rodomos modelio išvados pagal kriterijus.
+- **Pažodžiui rastos citatos** rodo rastų tekstų skaičių iš visų bendro atsakymo citatų. Paspaudę tikslios citatos mygtuką pamatysite paryškintą ištrauką šaltinyje. Patikra suvienodina tarpus; ar citata pagrindžia teiginį, sprendžia vertintojas.
 - Korpuse yra 99 pradinės ES BDAR redakcijos straipsniai, suskaidyti į 389 fragmentus. Jis neapima visos aktualios teismų praktikos, nacionalinių taisyklių ar visų EDPB išaiškinimų.
 
-Kad galėtumėte klausti lietuviškai, pradinė parinktis paruošia anglišką paieškos užklausą pagal jūsų klausimą ir paskutinius pokalbio ėjimus. Tiksli užklausa matoma dešinėje, skyrelyje **Paieškai naudota užklausa**. Šią parinktį galima išjungti. Tai atskiras modelio žingsnis, galintis pakeisti prasmę, todėl tyrime užklausą taip pat verta patikrinti.
+Pradinė parinktis paruošia paieškos užklausą pasirinkta korpuso kalba. Citatos pateikiamos ta pačia kalba kaip šaltinis. Užklausos pritaikymą galima išjungti.
 
 Pirmą kartą naudojant semantinį arba hibridinį metodą paruošiami visi 389 vektoriai. Ekrane rodomas tikras progresas. Vektoriai saugomi vietoje ir panaudojami vėl, kol nepasikeičia korpusas ar modelio digest.
+
+Kai pasirinktas vektorių modelis atmeta per ilgą tekstą, programa suskaido tą įvestį ir sujungia jos dalių vektorius pagal jų ilgį. RAG atsakyme ir citatų patikroje naudojamas visas originalus BDAR fragmentas su tuo pačiu ID. Eksporte indeksavimo taisyklė užfiksuojama lauke `metadata.embedding_format`.
 
 ## Metodų palyginimas
 
@@ -32,17 +34,30 @@ Pirmiausia įrašykite klausimą į pokalbio laukelį. Paspauskite **Palyginti m
 
 Palyginime naudojamas vienas paruoštas paieškos klausimas ir tie patys konteksto parametrai. Tai interaktyvus bandymas, **ne anksčiau užfiksuotas formalus angliškų klausimų eksperimentas**. Tam išlieka atskiras `rag_experiment.py` ir jo duomenų rinkinys.
 
+Norėdami palyginti kalbas, išsiųskite tą pačią įvestį su LT ir EN. Palikite tuos pačius modelius, metodą bei parametrus, istorijos ėjimus nustatykite į 0. Suvestinėje bus rodomi abiejų kalbų įrašai.
+
+**Paieškos metrikos** priima aktualių fragmentų etaloną bendram klausimui arba konkrečiam kriterijui, pvz., `32.1`. Precision matuoja, kokia rastų fragmentų dalis yra etalone. Recall matuoja, kokia etalono dalis rasta. F1 vienodai sveria abi metrikas, F2 suteikia didesnę reikšmę recall. Skaičiuojama iš reitingo top-k; papildomai įterpti straipsniai reitingo nekeičia.
+
+Prie įvesties paspauskite **NFR šablonai**. NFR-01 apima duomenų atkūrimą, NFR-02 – pranešimus apie duomenų saugumo pažeidimus. Šiems dviem šablonams parengti demonstraciniai etalonai pagal oficialų lietuvišką 2016 m. BDAR leidimą. Nepakeistam šablonui metrikos automatiškai rodomos po atsakymu, bendrai ir pagal kriterijus. **Etaloninės nuostatos ir pagrindimas** leidžia patikrinti, kodėl pasirinkta konkreti straipsnio dalis ar punktas.
+
+NFR-03 ir NFR-04 pateikti be etalono. Jiems metrikos atsiranda įvedus savo aktualius fragmentus. Šablonai ir etalonai laikomi faile `data/nfr_examples.json`. Metrikos vertina paieškos reitingą fragmentų lygiu. Atsakyme nurodytų punktų ir teisinio pagrindimo kokybę vertina žmogus.
+
+**Modelio mąstymo išvestis** rodo „Ollama“ siunčiamą `thinking` tekstą, kai modelis jį palaiko. Šis tekstas gali būti klaidingas. Jei sugeneruotas atsakymas netinka struktūrinei patikrai, programa gali pakartoti kvietimą ir atskirai pažymėti pirmojo kvietimo išvestį.
+
 ## Žmogaus vertinimas ir eksportas
 
 Paspaudę **Įvertinti** galite nurodyti savo vardą arba kodą, skirti teisingumo bei išsamumo balus ir pažymėti, kiek teiginių iš tikrųjų pagrindžia šaltiniai. Vertinimas išsaugomas tik žmogui užpildžius laukus ir patvirtinus, kad jis perskaitė šaltinius. Programa žmogaus balų nesugalvoja.
 
 **Eksportuoti pokalbį** atsisiunčia JSON su klausimais, atsakymais, šaltiniais, tiksliais promptais, modelių informacija ir jūsų vertinimais.
 
-Pokalbio rodinys bei nustatymai išlieka tos naršyklės vietinėje saugykloje. Paspaudus **Naujas pokalbis**, pradedamas tuščias pokalbis. Jau išsaugoti rezultatų failai nėra ištrinami.
+Viršuje atverkite **Pokalbiai**, kad peržiūrėtumėte išsaugotas užklausas ir atsakymus. Sąrašas išlieka perkrovus naršyklę ar laboratoriją. Paspaudus **Naujas pokalbis**, programa atveria tuščią pokalbį ir siunčia vykdomos užklausos nutraukimo signalą. Pasirinkus seną pokalbį, kito pokalbio užklausa toliau vykdoma. Greta jos būsenos galima spustelėti **Nutraukti** arba **Atidaryti pokalbį**. Iki nutraukimo baigti atsakymai lieka istorijoje.
+
+Senesni atsakymai atkurti iš rezultatų failų pagal bendrą paleidimo ID. Jei naršyklėje išliko ankstesnio pokalbio kopija, ją taip pat galima atverti sąraše. Nustatymai saugomi naršyklėje.
 
 ## Kur išsaugomi duomenys
 
 - `ui_data/runs/`: faktiniai modelio atsakymai, promptai, šaltiniai ir metaduomenys.
+- `ui_data/turns/`: įrašytos pokalbių užklausos, jų būsenos ir atsakymų ID.
 - `ui_data/reviews/`: žmogaus įrašyti vertinimai.
 - `ui_data/embeddings/`: pakartotinai naudojamas semantinės paieškos indeksas.
 - `ui_data/server.log`: paleidimo arba klaidų žurnalas.

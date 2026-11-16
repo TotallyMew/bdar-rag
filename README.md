@@ -8,6 +8,10 @@ Pakartojamas mini eksperimentas 15–20 min. pranešimui. Pagrindinis klausimas:
 
 Darbalaukyje dukart spustelėkite **BDAR RAG laboratorija** arba šiame aplanke **Paleisti BDAR pokalbi.cmd**. Viena įvestis automatiškai atpažįsta klausimą arba reikalavimą. Galima rašyti savo klausimus, keisti sisteminius promptus bei generavimo ir paieškos parametrus, palyginti aštuonis variantus, matyti atskirą modelio deklaruojamą pasitikėjimą, peržiūrėti šaltinius, įvesti žmogaus vertinimą ir eksportuoti pokalbį. Instrukcija: `POKALBIO_INSTRUKCIJA.md`. Veikia vietoje, be paskyros ar API rakto.
 
+Sąsajoje pagal numatytąją parinktį ieškoma **lietuviškame BDAR**. Kairėje galima perjungti į **EN** ir pakartoti tą pačią įvestį. Abiejų korpusų 389 fragmentų ID sutampa. Lietuviškas tekstas paimtas iš ES oficialiojo leidinio. Jį iš vietinės XHTML kopijos galima iš naujo suskaidyti komanda `python prepare_lt_corpus.py`. [Oficiali lietuviška redakcija](https://eur-lex.europa.eu/eli/reg/2016/679/oj/lit)
+
+Atvėrus **RAG paieškos rezultatą** matyti tikros užklausos, reitingas ir kokie fragmentai perduoti modeliui. Reikalavimo kriterijus rašykite atskirose eilutėse su `K1.`, `K2.` ir t. t. Kiekvienam kriterijui rodoma jo paieška, modelio išvada ir citata, jeigu modelis ją pateikia. **Paieškos metrikos** apskaičiuoja Precision@k, Recall@k, F1 ir F2 pagal žmogaus įvestus aktualių fragmentų ID. Formalusis `rag_experiment.py` naudoja fiksuotą anglišką rinkinį.
+
 ## Kas jau atlikta
 
 - Paruoštas viešo teisės akto korpusas: **99 straipsniai, 389 fragmentai**.

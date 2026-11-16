@@ -1,5 +1,6 @@
 """Integration checks use test doubles and temporary files, never research results."""
 import json
+import io
 from pathlib import Path
 import shutil
 import tempfile
@@ -49,6 +50,42 @@ class FakeClient:
                     'conditions':[],'refined_requirement':'TEST refined requirement','implementation_status':'not_assessed'}
         return {'parsed':value,'raw':json.dumps(value),'parse_error':None,'elapsed_ms':1}
 
+class LocalEmbeddingTests(unittest.TestCase):
+    def setUp(self):
+        self.client=ui.LocalClient('generator','nomic-embed-text:latest',threading.Event())
+
+    def test_oversize_input_is_embedded_without_dropping_words_or_changing_order(self):
+        prefix='search_document: '
+        calls=[]
+
+        def request(endpoint,body):
+            self.assertEqual(endpoint,'/api/embed')
+            self.assertFalse(body['truncate'])
+            self.assertEqual(body['model'],'nomic-embed-text:latest')
+            self.assertTrue(all(text.startswith(prefix) for text in body['input']))
+            parts=[text.removeprefix(prefix) for text in body['input']]
+            calls.append(parts)
+            if any(len(text)>11 for text in parts):
+                raise ui.core.OllamaHTTPError(endpoint,400,'the input length exceeds the context length')
+            return {'embeddings':[[float(len(part)),1.0] for part in parts]}
+
+        with patch.object(self.client,'request',side_effect=request):
+            result=self.client.embed([prefix+'next',prefix+'aaaaa bbbb cccc dddddd',prefix+'z'])
+        self.assertIn(['aaaaa bbbb','cccc dddddd'],calls)
+        self.assertEqual(result[0],[4.0,1.0])
+        self.assertEqual(result[2],[1.0,1.0])
+        self.assertAlmostEqual(result[1][0],221/21)
+        self.assertEqual(result[1][1],1.0)
+
+    def test_other_http_400_retains_the_service_error_without_retrying(self):
+        endpoint=self.client.host+'/api/embed'
+        error=urllib.error.HTTPError(endpoint,400,'Bad Request',None,io.BytesIO(b'{"error":"model cannot embed"}'))
+        with patch.object(urllib.request,'urlopen',side_effect=error) as request:
+            with self.assertRaisesRegex(ui.core.OllamaHTTPError,'model cannot embed'):
+                self.client.embed(['test'])
+        self.assertEqual(request.call_count,1)
+
+
 class UIIntegrationTests(unittest.TestCase):
     def setUp(self):
         self.tmp=tempfile.TemporaryDirectory();self.root=Path(self.tmp.name)
@@ -58,6 +95,74 @@ class UIIntegrationTests(unittest.TestCase):
         self.engine=ui.Engine(self.root)
         FakeClient.embeds=0;FakeClient.prompts=[]
     def tearDown(self):self.tmp.cleanup()
+
+    def test_chat_history_groups_turns_and_restores_saved_results(self):
+        conversation='a'*32
+        with patch.object(ui,'LocalClient',FakeClient):
+            first=self.engine.start({'question':'Pirmas klausimas','conversation_id':conversation,'methods':['bm25'],'auto_query':False})
+            a=self.wait(first['job_id'])
+            second=self.engine.start({'question':'Antras klausimas','conversation_id':conversation,'methods':['no_rag'],'auto_query':False})
+            b=self.wait(second['job_id'])
+        self.assertEqual([a['status'],b['status']],['done','done'])
+        restored=ui.Engine(self.root)
+        summary=restored.conversation_list()
+        self.assertEqual([(item['title'],item['count']) for item in summary],[('Pirmas klausimas',2)])
+        turns=restored.conversation(conversation)['turns']
+        self.assertEqual([t['question'] for t in turns],['Pirmas klausimas','Antras klausimas'])
+        self.assertEqual([t['result_ids'] for t in turns],[[a['results'][0]['id']],[b['results'][0]['id']]])
+        self.assertEqual(a['results'][0]['conversation_id'],conversation)
+
+    def test_failed_query_rewrite_falls_back_to_the_original_input(self):
+        question='Ar galiu bet kada atšaukti savo sutikimą?'
+        failed=ui.ModelOutputError('Pritaikyta užklausa pasiekė žetonų limitą.',{'raw':'truncated'})
+        with patch.object(ui,'LocalClient',FakeClient),patch.object(self.engine,'query',side_effect=failed):
+            job=self.engine.start({'question':question,'methods':['bm25'],'task_mode':'qa'})['job_id']
+            result=self.wait(job)
+        self.assertEqual(result['status'],'done',result['error'])
+        record=result['results'][0]
+        self.assertEqual(record['search_queries'],[question])
+        self.assertEqual(record['query_rewrite']['status'],'fallback')
+        self.assertEqual(record['query_rewrite']['generation'],{'raw':'truncated'})
+
+    def test_active_job_can_be_discovered_and_cancelled_from_another_chat(self):
+        entered=threading.Event()
+        release=threading.Event()
+
+        class SlowClient(FakeClient):
+            def generate(self,system,prompt,schema=None):
+                entered.set()
+                release.wait(3)
+                self.check()
+                return super().generate(system,prompt,schema)
+
+        conversation='a'*32
+        with patch.object(ui,'LocalClient',SlowClient):
+            pending=self.engine.start({'question':'Vykdoma užklausa','conversation_id':conversation,
+                'methods':['no_rag'],'task_mode':'qa','auto_query':False})['job_id']
+            try:
+                self.assertTrue(entered.wait(2))
+                summary=self.engine.active_job()
+                self.assertEqual((summary['id'],summary['conversation_id']),(pending,conversation))
+                after_restart=ui.Engine(self.root)
+                self.assertEqual(after_restart.conversation(conversation)['turns'][0]['status'],'interrupted')
+                self.engine.cancel(summary['id'])
+                self.assertTrue(self.engine.active_job()['cancel_requested'])
+            finally:
+                release.set()
+            self.assertEqual(self.wait(pending)['status'],'cancelled')
+        self.assertIsNone(self.engine.active_job())
+        stored=ui.Engine(self.root).conversation(conversation)['turns'][0]
+        self.assertEqual((stored['status'],stored['result_ids']),('cancelled',[]))
+
+    def test_legacy_comparison_results_are_recoverable_as_one_chat(self):
+        comparison='b'*32
+        for n,run_id in enumerate(('c'*32,'d'*32)):
+            ui.atomic_json(self.engine.storage/'runs'/(run_id+'.json'),{
+                'id':run_id,'question':'Ankstesnė užklausa','comparison_id':comparison,
+                'created_utc':f'2026-11-16T14:0{n}:00+00:00'})
+        engine=ui.Engine(self.root)
+        self.assertEqual(engine.conversation_list()[0]['title'],'Ankstesnė užklausa')
+        self.assertEqual(engine.conversation(comparison)['turns'][0]['result_ids'],['c'*32,'d'*32])
 
     def test_extracts_lithuanian_and_english_article_references(self):
         self.assertEqual(

@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "source": "https://eur-lex.europa.eu/eli/reg/2016/679/oj/lit",
+  "templates": [
+    {
+      "id": "NFR-01",
+      "title": "Duomenų atkūrimas po incidento",
+      "prompt": "NFR-01. Sistema turi užtikrinti galimybę atkurti prieigą prie joje tvarkomų asmens duomenų po fizinio ar techninio incidento.\nK1. Po fizinio ar techninio incidento galima atkurti prieigą prie asmens duomenų.\nK2. Prieiga prie asmens duomenų atkuriama per ne daugiau kaip 24 valandas po incidento.\nK3. Atkūrimo priemonių veiksmingumas tikrinamas kas tris mėnesius.\n\nKiekvienam kriterijui nurodyk susijusį BDAR straipsnį, dalį ar punktą, pateik tikslią citatą ir paaiškink, ką nuostata pagrindžia. Pažymėk, kuri kriterijaus dalis yra projekto sprendimas arba lieka nepagrįsta.",
+      "gold": {
+        "K1": [{"id": "GDPR:32.1", "points": ["c"], "why": "Nuostata numato gebėjimą laiku atkurti galimybes naudotis asmens duomenimis po fizinio ar techninio incidento."}],
+        "K2": [{"id": "GDPR:32.1", "points": ["c"], "why": "Nuostata pagrindžia atkūrimą laiku. 24 valandų riba yra šiame reikalavime pasirinktas projekto tikslas."}],
+        "K3": [{"id": "GDPR:32.1", "points": ["d"], "why": "Nuostata pagrindžia reguliarų priemonių tikrinimą ir veiksmingumo vertinimą. Trijų mėnesių intervalas yra projekto sprendimas."}]
+      }
+    },
+    {
+      "id": "NFR-02",
+      "title": "Pranešimai apie duomenų saugumo pažeidimus",
+      "prompt": "NFR-02. Sistema turi padėti laiku pranešti apie asmens duomenų saugumo pažeidimus ir užtikrinti jų dokumentavimo atsekamumą.\nK1. Sistema fiksuoja, kada duomenų valdytojas sužinojo apie pažeidimą, ir padeda jam nepagrįstai nedelsiant bei, jei įmanoma, per 72 valandas pranešti kompetentingai priežiūros institucijai, kai pažeidimas gali kelti pavojų asmenų teisėms ir laisvėms. Vėluojant registruojamos priežastys, kurios pridedamos prie pranešimo.\nK2. Sistema suteikia duomenų tvarkytojui priemonę, sužinojus apie pažeidimą, nepagrįstai nedelsiant pranešti duomenų valdytojui.\nK3. Pranešime priežiūros institucijai fiksuojamas pažeidimo pobūdis, jei įmanoma, susijusių asmenų ir įrašų kategorijos bei apytiksliai skaičiai ir už informaciją atsakingo asmens kontaktai.\nK4. Pranešime priežiūros institucijai aprašomos tikėtinos pažeidimo pasekmės ir pažeidimo pašalinimo bei neigiamų pasekmių mažinimo priemonės.\nK5. Sistema kiekvienam pažeidimui išsaugo faktus, poveikį ir atliktus taisomuosius veiksmus, kad būtų galima patikrinti atitiktį.\n\nKiekvienam kriterijui nurodyk susijusį BDAR straipsnį, dalį ar punktą, pateik tikslią citatą ir paaiškink, ką nuostata pagrindžia. Pažymėk, kuri kriterijaus dalis yra projekto sprendimas arba lieka nepagrįsta.",
+      "gold": {
+        "K1": [{"id": "GDPR:33.1", "points": [], "why": "Dalis apibrėžia valdytojo pranešimo pareigą, 72 valandų terminą, jei įmanoma, nuo sužinojimo, išimtį dėl pavojaus ir pareigą pridėti vėlavimo priežastis. Laiko žyma sistemoje padeda šį terminą sekti."}],
+        "K2": [{"id": "GDPR:33.2", "points": [], "why": "Dalis atskirai nustato tvarkytojo pareigą nepagrįstai nedelsiant informuoti valdytoją sužinojus apie pažeidimą."}],
+        "K3": [{"id": "GDPR:33.3", "points": ["a", "b"], "why": "Punktai apibrėžia pranešimo duomenis apie pažeidimo pobūdį, susijusius asmenis ir įrašus bei kontaktinį asmenį."}],
+        "K4": [{"id": "GDPR:33.3", "points": ["c", "d"], "why": "Punktai reikalauja aprašyti pasekmes ir priemones pažeidimui pašalinti bei, kai tinkama, neigiamoms pasekmėms sumažinti."}],
+        "K5": [{"id": "GDPR:33.5", "points": [], "why": "Dalis įpareigoja dokumentuoti visus pažeidimus, jų faktus, poveikį ir taisomuosius veiksmus, kad institucija galėtų patikrinti atitiktį."}]
+      }
+    },
+    {
+      "id": "NFR-03",
+      "title": "Prieigos kontrolė ir konfidencialumas",
+      "prompt": "NFR-03. Sistema turi užtikrinti joje tvarkomų asmens duomenų konfidencialumą valdydama prieigos teises.\nK1. Prieiga suteikiama tik identifikuotiems darbuotojams pagal jų darbo funkcijas ir būtinos prieigos principą.\nK2. Panaikinus darbuotojo prieigą, jo aktyvios sesijos nutraukiamos per 15 minučių.\nK3. Administratorių prieigos prie asmens duomenų ir teisių keitimai registruojami peržiūrai.\n\nKiekvienam kriterijui nurodyk susijusį BDAR straipsnį, dalį ar punktą, pateik tikslią citatą ir paaiškink, ką nuostata pagrindžia. Pažymėk, kuri kriterijaus dalis yra projekto sprendimas arba lieka nepagrįsta.",
+      "gold": null
+    },
+    {
+      "id": "NFR-04",
+      "title": "Asmens duomenų saugojimo trukmė",
+      "prompt": "NFR-04. Sistema turi riboti laikotarpį, kurį saugomi asmens duomenys identifikuojama forma.\nK1. Kiekvienai duomenų kategorijai taikoma saugojimo trukmė pagal tvarkymo tikslą ir taikomas saugojimo prievoles.\nK2. Pasibaigus nustatytam terminui, sistema automatiškai ištrina arba nuasmenina duomenis per 7 dienas, jeigu nėra pagrindo juos toliau saugoti.\nK3. Sistema fiksuoja saugojimo išimties pagrindą, atsakingą asmenį ir kitą išimties peržiūros datą.\n\nKiekvienam kriterijui nurodyk susijusį BDAR straipsnį, dalį ar punktą, pateik tikslią citatą ir paaiškink, ką nuostata pagrindžia. Pažymėk, kuri kriterijaus dalis yra projekto sprendimas arba lieka nepagrįsta.",
+      "gold": null
+    }
+  ]
+}
